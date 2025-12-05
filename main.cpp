@@ -360,32 +360,31 @@ void loop() {
     }
 
     else if (pageIndex == 1) {
-      display.setCursor(5, 5);
+      display.setTextSize(1);
+      display.setCursor(10, 5);
       display.println("Semoga diberikan");
-      display.setCursor(5, 20);
-      display.println("umur yang panjang,");
-      display.setCursor(5, 35);
-      display.println("sehat, dan sukses");
-      display.setCursor(5, 50);
-      display.println("di setiap langkah.");
+      display.setCursor(10, 20);
+      display.println("umur yang panjang");
+      display.setTextSize(1);
+      display.setCursor(10, 35);
+      display.println("dan sehat selalu");
+      display.setCursor(90, 55);
+      display.println("next>>");
     }
 
     else if (pageIndex == 2) {
-      display.setTextSize(2);
-      display.setCursor(10, 20);
-      display.println("Tetap");
-      display.setCursor(10, 40);
-      display.println("Semangat!");
+     display.clearDisplay();
+     display.setTextSize(1);
+     display.setCursor(20, 25);
+     display.println("i hope you like");
+     display.setCursor(30, 40);
+     display.println("this project");
     }
 
     else if (pageIndex == 3) {
       display.setTextSize(1);
-      display.setCursor(10, 15);
-      display.println("Terima kasih.");
-      display.setCursor(10, 35);
-      display.println("Tekan tombol untuk");
-      display.setCursor(10, 50);
-      display.println("memulai lagi!");
+     display.setCursor(40, 30);
+     display.println("Thank you");
     }
 
     // TAMPILKAN SEMUA TEKS SEKALIGUS
@@ -416,7 +415,7 @@ void loop() {
 
   // Setelah slideshow selesai, kembali ke loop awal (tampilan "Tekan tombol untuk mulai")
   display.clearDisplay();
-  display.setTextSize(1);
+  display.setTextSize(1.5);
   display.setCursor(30, 20);
   display.println("Tekan tombol");
   display.setCursor(32, 35);
