@@ -6,5 +6,5 @@ Proyek ini merupakan sistem ucapan ulang tahun interaktif menggunakan Arduino Na
 	1. ubah password pada baris kode 12
 	2. ubah nama dan kata ucapan pada baris 307 - 346
 
-## CARA MENGGUNAKAN
+## FOTO RANGKAIAN
 ![Gambar](foto-rangkaian.jpg)
