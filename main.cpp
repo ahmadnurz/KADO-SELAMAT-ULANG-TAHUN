@@ -1,31 +1,15 @@
-/*
-  Happy Birthday + OLED SSD1306 Display with Password Lock
-  Arduino Nano
-  + Tombol Start/Input 1 pin D3 (button1Pin)
-  + Tombol Input 2 pin D9 (button2Pin)
-  + Fix Buzzer Tidak Bunyi Terus
-  + FIX: Slideshow menggunakan print statis (tanpa efek ketik) agar teks muncul instan.
-*/
-
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
-
 #define SCREEN_WIDTH 128
 #define SCREEN_HEIGHT 64
-
-// Inisialisasi display OLED
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
 
-// ==== PIN BUZZER & TOMBOL ====
 int speakerPin = 12;      // PIN BUZZER
 int button1Pin = 3;       // TOMBOL START / INPUT 1 (D3)
 int button2Pin = 9;       // TOMBOL INPUT 2 (D9)
 
-// ==== KONFIGURASI PASSWORD ====
-const String correctPassword = "1212"; // '1' = Tombol 1 (D3), '2' = Tombol 2 (D9)
-
-// ==== DATA LAGU ====
+const String correctPassword = "1212"; //GANTI PASSWORD
 int length = 28;
 char notes[] = "GGAGcB GGAGdc GGxecBA yyecdc";
 int beats[] = {
@@ -36,12 +20,7 @@ int beats[] = {
 };
 int tempo = 150;
 
-// =======================
-// FUNGSI FEEDBACK BUNYI
-// =======================
 void playClick() {
-  // Bunyi klik pendek untuk feedback tombol
-  // Menggunakan fungsi playTone agar lebih bersih
   int toneValue = 500; // Frekuensi
   int duration = 50;   // Durasi pendek
   long cycles = (long)duration * 1000L / (toneValue * 2);
@@ -56,9 +35,6 @@ void playClick() {
   digitalWrite(speakerPin, LOW);
 }
 
-// =======================
-// FUNGSI PLAY TONE FIX
-// =======================
 void playTone(int toneValue, int duration) {
   long cycles = (long)duration * 1000L / (toneValue * 2);
 
@@ -72,9 +48,6 @@ void playTone(int toneValue, int duration) {
   digitalWrite(speakerPin, LOW);
 }
 
-// =======================
-// FUNGSI PLAY NOTE FIX
-// =======================
 void playNote(char note, int duration) {
   char names[] = {
     'C','D','E','F','G','A','B',
@@ -89,7 +62,7 @@ void playNote(char note, int duration) {
      655, 715 // 'x' and 'y'
   };
 
-  int SPEE = 5; // Kecepatan
+  int SPEE = 5; 
   int found = 0;
 
   for (int i = 0; i < 17; i++) {
@@ -106,31 +79,19 @@ void playNote(char note, int duration) {
   }
 }
 
-// =======================
-// FUNGSI TAMPILAN KETIK OLED
-// Digunakan untuk efek ketik pada teks pendek/awal
-// =======================
 void typeOLED(String text, int x, int y, int speed) {
   display.setCursor(x, y);
 
   for (int i = 0; i < text.length(); i++) {
     display.print(text[i]);
     display.display();
-
-    // Bunyi klik pendek setiap huruf
     playClick();
-
-    delay(speed);    // kecepatan antar huruf
+    delay(speed);
   }
 
-  // Menghapus delay(500) di sini agar jika ada 
-  // baris typeOLED berurutan, jedanya tidak terlalu lama.
-  // delay(500); 
 }
 
-
 void playPasswordSound() {
-  // Backsound sederhana (3 nada)
   playTone(500, 100); 
   delay(50);
   playTone(500, 100);
@@ -140,9 +101,6 @@ void playPasswordSound() {
   playTone(300, 100);
 }
 
-// =======================
-// FUNGSI INPUT PASSWORD
-// =======================
 bool passwordEntry() {
   String inputPassword = "";
   int inputCount = 0;
